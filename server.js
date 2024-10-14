@@ -16,9 +16,10 @@ server.use((req, res, next) =>{
 
 server.use(bodyParser.json()); 
 
-const cadastrar = require('./router/buscarTodasPlantas.js');
+const buscarTodasPlantas = require('./router/buscarTodasPlantas.js');
+const buscarDetalhesPlanta = require('./router/buscarDetalhesPlanta.js');
 
-server.use('/', cadastrar);
+server.use('/', buscarTodasPlantas, buscarDetalhesPlanta);
 server.use(express.static(path.join(__dirname, 'public')));
 
 server.listen(8080, () =>{
