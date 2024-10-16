@@ -18,8 +18,10 @@ server.use(bodyParser.json());
 
 const buscarTodasPlantas = require('./router/buscarTodasPlantas.js');
 const buscarDetalhesPlanta = require('./router/buscarDetalhesPlanta.js');
+const inserirNovoCultivo = require('./router/inserirNovoCultivo.js');
+const inserirCadastro = require('./router/inserirCadastro.js');
 
-server.use('/', buscarTodasPlantas, buscarDetalhesPlanta);
+server.use('/', buscarTodasPlantas, buscarDetalhesPlanta, inserirNovoCultivo, inserirCadastro);
 server.use(express.static(path.join(__dirname, 'public')));
 
 server.listen(8080, () =>{
