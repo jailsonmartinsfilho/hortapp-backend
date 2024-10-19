@@ -11,7 +11,6 @@ router.post('/inserirCadastro', (req, res) => {
             console.error('Erro ao inserir dados:', err);
             res.status(500).send('Erro ao inserir dados no banco de dados');
         } else {
-            console.log('Cadastro realizado')
             res.send('Cadastro realizado');
         }
     });
