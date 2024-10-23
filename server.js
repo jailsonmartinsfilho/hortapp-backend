@@ -20,8 +20,11 @@ const buscarTodasPlantas = require('./router/buscarTodasPlantas.js');
 const buscarDetalhesPlanta = require('./router/buscarDetalhesPlanta.js');
 const inserirNovoCultivo = require('./router/inserirNovoCultivo.js');
 const inserirCadastro = require('./router/inserirCadastro.js');
+const realizarLogin = require('./router/realizarLogin.js');
+const buscarTodosCultivos = require('./router/buscarTodosCultivos.js');
+const buscarDetalhesCultivo = require('./router/buscarDetalhesCultivo.js');
 
-server.use('/', buscarTodasPlantas, buscarDetalhesPlanta, inserirNovoCultivo, inserirCadastro);
+server.use('/', buscarTodasPlantas, buscarDetalhesPlanta, inserirNovoCultivo, inserirCadastro, realizarLogin, buscarTodosCultivos, buscarDetalhesCultivo);
 server.use(express.static(path.join(__dirname, 'public')));
 
 server.listen(8080, () =>{
