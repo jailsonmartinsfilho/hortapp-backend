@@ -6,7 +6,6 @@ router.post('/buscarDetalhesPlanta', (req, res) => {
     const {planta} = req.body;
 
     connection.query('SELECT nome, tempo_cultivo, modo_cultivo, clima_ideal, tipo_solo FROM plantas WHERE nome = ?', [planta], (err, results) => {
-        console.log(err)
         res.send(results);
     });
 });

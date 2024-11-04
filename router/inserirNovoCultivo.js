@@ -16,9 +16,8 @@ router.post('/inserirNovoCultivo', (req, res) => {
         connection.query('INSERT INTO cultivos SET ?', dadosCultivo, (err, result) => {
             if (err) {
                 res.sendStatus(500);
-                console.log(err)
             }
-            res.status(201)
+            res.sendStatus(201);
         });
     });
 });
