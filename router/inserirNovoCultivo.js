@@ -3,22 +3,53 @@ const router = Router();
 const connection = require('../database.js');
 
 router.post('/inserirNovoCultivo', (req, res) => {
-    const { planta, email } = req.body;
-    connection.query('SELECT * FROM plantas WHERE nome = ?', planta, (err, results) => {
-        const { nome, tempo_cultivo, modo_cultivo, clima_ideal, tipo_solo } = results[0];
-        const data_inicio = new Date();
-        const tempoCultivoEmDias = parseInt(tempo_cultivo.split('-')[1].trim());
-        const data_estimativa_colheita = new Date(data_inicio);
-        data_estimativa_colheita.setDate(data_estimativa_colheita.getDate() + tempoCultivoEmDias);
 
-        const dadosCultivo = { email_usuario: email, nome_planta: nome, data_inicio: data_inicio, data_estimativa_colheita: data_estimativa_colheita, progresso_cultivo: 0};
+    console.log(req.body)
+    
+    const {
+        email_usuario,
+        nome_planta,
+        nome_cientifico,
+        tempo_cultivo,
+        progresso_cultivo,
+        quantidade_rega,
+        etiqueta_sol,
+        etiqueta_dificuldade,
+        etiqueta_agua,
+        etiqueta_tempo,
+    } = req.body;
 
-        connection.query('INSERT INTO cultivos SET ?', dadosCultivo, (err, result) => {
-            if (err) {
-                res.sendStatus(500);
-            }
-            res.sendStatus(201);
-        });
+
+    // Data atual como início do cultivo
+    const data_inicio = new Date();
+
+    // Calcula a data estimada de colheita
+    const data_estimativa_colheita = new Date(data_inicio);
+    data_estimativa_colheita.setDate(data_inicio.getDate() + tempo_cultivo);
+
+    // Dados do cultivo a serem inseridos no banco de dados
+    const dadosCultivo = {
+        email_usuario,
+        nome_planta,
+        nome_cientifico,
+        data_inicio: data_inicio,  // Formato de data (YYYY-MM-DD)
+        data_estimativa_colheita: data_estimativa_colheita,  // Formato de data
+        progresso_cultivo: progresso_cultivo || 0,  // Caso o progresso não seja informado, iniciar como 0
+        quantidade_rega,
+        etiqueta_sol,
+        etiqueta_dificuldade,
+        etiqueta_agua,
+        etiqueta_tempo,
+    };
+
+    // Insere os dados no banco de dados
+    connection.query('INSERT INTO cultivos SET ?', dadosCultivo, (err, result) => {
+        if (err) {
+            console.log(err)
+            return res.status(500).send('Erro ao inserir cultivo.');
+        }
+    
+        res.status(201).send('Cultivo inserido com sucesso!');
     });
 });
 

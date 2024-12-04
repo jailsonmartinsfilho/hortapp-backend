@@ -27,6 +27,6 @@ const buscarDetalhesCultivo = require('./router/buscarDetalhesCultivo.js');
 server.use('/', buscarTodasPlantas, buscarDetalhesPlanta, inserirNovoCultivo, inserirCadastro, realizarLogin, buscarTodosCultivos, buscarDetalhesCultivo);
 server.use(express.static(path.join(__dirname, 'public')));
 
-server.listen(8082, () =>{
-    console.log("Servidor iniciado na porta 8080: http://localhost:8080");
+server.listen(8083, () =>{
+    console.log("Servidor iniciado na porta 8083: http://localhost:8083");
 });
