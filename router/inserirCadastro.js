@@ -14,7 +14,7 @@ router.post('/inserirCadastro', (req, res) => {
         const dadosUsuario = { id: idUnico, nome, email, senha: senhaCriptografada };
 
         connection.query('INSERT INTO usuarios SET ?', dadosUsuario, (err, result) => {
-            res.send({ id: idUnico, nome });
+            res.send({ id: idUnico, nome, email});
         });
     });
 });
